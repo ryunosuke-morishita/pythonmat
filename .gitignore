@@ -1,0 +1,24 @@
+/.quarto/
+**/*.quarto_ipynb
+
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# uv
+.uv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Quarto
+.quarto/
+_freeze/
+
+# OS
+.DS_Store
+

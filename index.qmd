@@ -1,0 +1,8 @@
+---
+title: "python勉強会"
+---
+
+This is a Quarto website.
+
+This site is a handout for learning python and using it in self-organized seminars.
+

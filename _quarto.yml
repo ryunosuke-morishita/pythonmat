@@ -1,0 +1,26 @@
+project:
+  type: website
+
+website:
+  title: "Python勉強会"
+  navbar:
+    left:
+      - href: index.qmd
+        text: ホーム
+      - href: basic01.qmd
+        text: 第1回
+    right:
+      - icon: github
+        href: https://github.com/ryunosuke-morishita
+
+format:
+  html:
+    theme: cosmo
+         - brand
+    toc: true
+    code-copy: true
+    code-fold: false
+    html-math-method: katex
+
+execute:
+  freeze: auto
