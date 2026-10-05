@@ -19,5 +19,12 @@
     "title": "第一回",
     "section": "",
     "text": "pythonを実際に動かしてみる。例によって「Hello, World!」とでも返すようなものを書いてみよう。\n\nprint(\"Hello,World!\")\n\nHello,World!\n\n\n　実際に動いただろうか。もし動かなかった場合は自分が参照しているpythonの場所を確認して設定し直して欲しい。"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "python勉強会",
+    "section": "",
+    "text": "This is a Quarto website.\nThis site is a handout for learning python and using it in self-organized seminars."
   }
 ]
