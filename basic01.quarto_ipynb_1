@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "markdown",
-   "id": "d60eec76",
+   "id": "58106a28",
    "metadata": {},
    "source": [
     "---\n",
@@ -27,7 +27,7 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "50dc2a5b",
+   "id": "40dc4ac8",
    "metadata": {},
    "outputs": [
     {
@@ -44,7 +44,7 @@
   },
   {
    "cell_type": "markdown",
-   "id": "dd62c185",
+   "id": "02d75c23",
    "metadata": {},
    "source": [
     "　実際に動いただろうか。もし動かなかった場合は自分が参照しているpythonの場所を確認して設定し直して欲しい。"
