@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>python勉強会 – Python勉強会</title>
+<title>第一回 – Python勉強会</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -92,11 +127,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">ホーム</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./basic01.html"> 
+    <a class="nav-link active" href="./basic01.html" aria-current="page"> 
 <span class="menu-text">第1回</span></a>
   </li>  
 </ul>
@@ -117,15 +152,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#はじめに" id="toc-はじめに" class="nav-link active" data-scroll-target="#はじめに">はじめに</a>
+  <ul class="collapse">
+  <li><a href="#pythonとは" id="toc-pythonとは" class="nav-link" data-scroll-target="#pythonとは">pythonとは</a></li>
+  <li><a href="#実際に動かす" id="toc-実際に動かす" class="nav-link" data-scroll-target="#実際に動かす">実際に動かす</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">python勉強会</h1>
+<h1 class="title">第一回</h1>
 </div>
 
 
@@ -142,10 +187,27 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is a Quarto website.</p>
-<p>This site is a handout for learning python and using it in self-organized seminars.</p>
+<section id="はじめに" class="level1">
+<h1>はじめに</h1>
+<p>今回はpythonとはから始まり、基本文法・演算子までをまとめる。</p>
+<section id="pythonとは" class="level2">
+<h2 class="anchored" data-anchor-id="pythonとは">pythonとは</h2>
+<p>　pythonとはRと同じインタプリタ言語である。インタプリタ言語の特徴としては記述が簡単という点が挙げられるだろう。その他にはコンパイル言語と呼ばれるCやJavaなどが存在する。コンパイル型言語はインタプリタ言語に比べ記述が一般的には難しい。その代わり、コンパイルした後のコードを動かすため処理が速い点がメリットとして挙げられる。 　 　現在のpythonはpython3であり、python2に修正が加えられ使いやすくなっている。またパッケージ管理はpipが主流？であったが、今はどうやらuvで管理するのが良いらしい。ただし注意点としてはuvはまだバージョンが1を超えていないため注意が必要である。（唐突に極端な変化が加えられて動かなく可能性があるため） 　この勉強会ではuvを使っていきたいと考えているため、この資料もパッケージをとってくる際はuvの記法になっていることをあらかじめ了承いただきたい。</p>
+</section>
+<section id="実際に動かす" class="level2">
+<h2 class="anchored" data-anchor-id="実際に動かす">実際に動かす</h2>
+<p>　pythonを実際に動かしてみる。例によって「Hello, World!」とでも返すようなものを書いてみよう。</p>
+<div id="e2886f69" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello,World!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hello,World!</code></pre>
+</div>
+</div>
+<p>　実際に動いただろうか。もし動かなかった場合は自分が参照しているpythonの場所を確認して設定し直して欲しい。</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
