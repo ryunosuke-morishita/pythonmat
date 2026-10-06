@@ -106,6 +106,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -160,7 +203,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#はじめに" id="toc-はじめに" class="nav-link active" data-scroll-target="#はじめに">はじめに</a>
   <ul class="collapse">
   <li><a href="#pythonとは" id="toc-pythonとは" class="nav-link" data-scroll-target="#pythonとは">pythonとは</a></li>
+  <li><a href="#仮想環境とパッケージ管理" id="toc-仮想環境とパッケージ管理" class="nav-link" data-scroll-target="#仮想環境とパッケージ管理">仮想環境とパッケージ管理</a></li>
   <li><a href="#実際に動かす" id="toc-実際に動かす" class="nav-link" data-scroll-target="#実際に動かす">実際に動かす</a></li>
+  <li><a href="#変数と代入" id="toc-変数と代入" class="nav-link" data-scroll-target="#変数と代入">変数と代入</a></li>
+  <li><a href="#演算子" id="toc-演算子" class="nav-link" data-scroll-target="#演算子">演算子</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -194,16 +240,214 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="pythonとは">pythonとは</h2>
 <p>　pythonとはRと同じインタプリタ言語である。インタプリタ言語の特徴としては記述が簡単という点が挙げられるだろう。その他にはコンパイル言語と呼ばれるCやJavaなどが存在する。コンパイル型言語はインタプリタ言語に比べ記述が一般的には難しい。その代わり、コンパイルした後のコードを動かすため処理が速い点がメリットとして挙げられる。 　 　現在のpythonはpython3であり、python2に修正が加えられ使いやすくなっている。またパッケージ管理はpipが主流？であったが、今はどうやらuvで管理するのが良いらしい。ただし注意点としてはuvはまだバージョンが1を超えていないため注意が必要である。（唐突に極端な変化が加えられて動かなく可能性があるため） 　この勉強会ではuvを使っていきたいと考えているため、この資料もパッケージをとってくる際はuvの記法になっていることをあらかじめ了承いただきたい。</p>
 </section>
+<section id="仮想環境とパッケージ管理" class="level2">
+<h2 class="anchored" data-anchor-id="仮想環境とパッケージ管理">仮想環境とパッケージ管理</h2>
+<p>　ここでは勉強会で用いる仮想環境とパッケージ管理について簡単に記述する。勉強会では前でも述べたように<code>uv</code>を使用する。<code>uv</code>は<a href="https://docs.astral.sh/uv/getting-started/installation/">公式サイト</a>に従ってターミナルから入手できる。 　<code>uv</code>のメリットはたくさんある。その中でも、パッケージ管理が楽であることと、処理が速いことが挙げられるだろう。pythonも仮想環境もパッケージ管理も<code>uv</code>1つで行うことができる。 　<code>uv</code>をダウンロードできたら任意のディレクトリを作成し、そこに<code>uv</code>環境を構築する。まずは<code>uv init</code>でプロジェクトを作成し、<code>uv venv --python **</code>でプロジェクトのpythonのバージョンを指定しながら仮想環境を構築できる。特定のバージョンのpythonを扱いたい時は、<code>uv python install **</code>でpythonをインストールできる。 　パッケージ管理は<code>uv add **</code>で行う。</p>
+</section>
 <section id="実際に動かす" class="level2">
 <h2 class="anchored" data-anchor-id="実際に動かす">実際に動かす</h2>
 <p>　pythonを実際に動かしてみる。例によって「Hello, World!」とでも返すようなものを書いてみよう。</p>
-<div id="e2886f69" class="cell" data-execution_count="1">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello,World!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello,World!</code></pre>
 </div>
 </div>
 <p>　実際に動いただろうか。もし動かなかった場合は自分が参照しているpythonの場所を確認して設定し直して欲しい。</p>
+</section>
+<section id="変数と代入" class="level2">
+<h2 class="anchored" data-anchor-id="変数と代入">変数と代入</h2>
+<p>　変数とはその名前の通りに変化する値のことである。ただし数値ではなくていい。pythonにおいて変数を扱うには以下のように記述する。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10</code></pre>
+</div>
+</div>
+<p>ここで、xは変数である。このxと10を繋いでいる<code>=</code>は<strong>代入演算子</strong>と呼ばれ、右辺を左辺に格納する役割を持つ。</p>
+<p>ちなみにRの記述をすると以下である。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+<p>であり、代入演算子は<code>&lt;-</code>である。</p>
+<p><code>=</code>であるが、pythonの中ではこれは式を表していないことに注意されたい。なので後ほど詳しく書くが、以下の文は正しい記法である。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3</code></pre>
+</div>
+</div>
+<p>　また、代入についてpythonは右辺そのものを左辺に格納していない。メモリ上にあるアドレスを格納している。この性質を理解するために以下の文を見てほしい。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>num1 <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>num2 <span class="op">=</span> num1</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(num1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4362807888</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(num2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4362807888</code></pre>
+</div>
+</div>
+<p>以下の文もこの性質によりかける。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>y.append(<span class="dv">4</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 4]</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 4]</code></pre>
+</div>
+</div>
+<p>これをRでかくとこうなる。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4</code></pre>
+</div>
+</div>
+<p>これで代入についての概要は理解できたのではないだろうか。</p>
+<p>　またデータ型の分類が複数存在する。例としては整数型や、文字列型などである。これら型の値のことを<strong>リテラル</strong>と呼ぶ。加えてそれぞれの型には性質がある。</p>
+<div id="tbl-datast" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-datast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: データ型
+</figcaption>
+<div aria-describedby="tbl-datast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">名称</th>
+<th style="text-align: center;">性質</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">ミュータブル</td>
+<td style="text-align: center;">変更可能</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">イミュータブル</td>
+<td style="text-align: center;">変更不可能</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">イテラブル</td>
+<td style="text-align: center;">反復可能</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">シーケンス</td>
+<td style="text-align: center;">順序を持つ（インデックスでのアクセスが可）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">コンテナー</td>
+<td style="text-align: center;">下のレベルに複数の値を格納可能</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>これら性質はこれからも扱っていくのでイメージできるようにしておきたい。例えば、リストはコンテナーでミュータブル型であり、タプルは順序つきのリストでイミュータブル型である。</p>
+</section>
+<section id="演算子" class="level2">
+<h2 class="anchored" data-anchor-id="演算子">演算子</h2>
+<p>　ここでは演算子を扱う。まとめると以下の <a href="#tbl-calc" class="quarto-xref">Table&nbsp;2</a> である。</p>
+<div id="tbl-calc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-calc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: 演算子まとめ
+</figcaption>
+<div aria-describedby="tbl-calc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">演算子</th>
+<th style="text-align: center;">概要</th>
+<th style="text-align: center;">例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>+</code></td>
+<td style="text-align: center;">加算</td>
+<td style="text-align: center;">5 + 2 -&gt; 7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>-</code></td>
+<td style="text-align: center;">減算</td>
+<td style="text-align: center;">5 - 2 -&gt; 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: center;">乗算</td>
+<td style="text-align: center;">5 * 2 -&gt; 10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>**</code></td>
+<td style="text-align: center;">べき乗</td>
+<td style="text-align: center;">5 ** 2 -&gt; 25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>/</code></td>
+<td style="text-align: center;">除算</td>
+<td style="text-align: center;">5 / 2 -&gt; 2.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>//</code></td>
+<td style="text-align: center;">除算（切り捨て）</td>
+<td style="text-align: center;">5 // 2 -&gt; 2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>%</code></td>
+<td style="text-align: center;">剰余</td>
+<td style="text-align: center;">5 % 2 -&gt; 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>　これは数値以外でも用いることができるが組み合わせによっては演算できないものが存在する。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">15</span> <span class="op">+</span> <span class="st">"30"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>TypeError: unsupported operand type(s) for +: 'int' and 'str'</code></pre>
+</div>
+</div>
+<p>以下のコードは上の文を改め数値型と文字型に直して演算したものである。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">15</span> <span class="op">+</span> <span class="bu">int</span>(<span class="st">"30"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>45</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>(<span class="dv">15</span>) <span class="op">+</span> <span class="st">"30"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1530</code></pre>
+</div>
+</div>
+<p>　算術演算については上の通りであるが、コンピュータ上（主にプログラミング）においては小数の演算には注意されたい。簡単に理由を説明しておくと、コンピュータ上で扱っている数値は我々の10進法とは違い2進法で基本的には動いている。例えば我々は<span class="math inline">0.1 = 1/10</span>なので扱いやすいが、コンピュータでは扱いにくい数値である。それは位が<span class="math inline">\frac{1}{2}, \ \frac{1}{4}, \cdots</span>となるためである。</p>
 
 
 </section>

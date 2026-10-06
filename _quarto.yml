@@ -25,3 +25,5 @@ format:
 
 execute:
   freeze: auto
+
+jupyter: python3
