@@ -10,19 +10,25 @@ website:
         text: ホーム
       - href: basic01.qmd
         text: 第1回
+      - href: basic02.qmd
+        text: 第2回
     right:
       - icon: github
         href: https://github.com/ryunosuke-morishita
 
 format:
   html:
-    theme: cosmo
-         - brand
+    theme: 
+      light: cosmo
+            - brand
+      dark: cyborg
     toc: true
     number-sections: true
     code-copy: true
     code-fold: false
     html-math-method: katex
+    mainfont: "Hiragino Sans"
+    monofont: "Noto Sans Mono"
 
 execute:
   freeze: auto
