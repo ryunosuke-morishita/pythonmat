@@ -421,8 +421,8 @@ window.Quarto = {
 <p>　ここまでのプログラムは記述された順に処理して実行していた。しかし、実際はユーザーからの入力値や実行環境、その他条件に応じて、処理を変えるだろう。そのための処理の仕方を今回は学ぶ。</p>
 <section id="単純分岐" class="level4" data-number="1.1.1">
 <h4 data-number="1.1.1" class="anchored" data-anchor-id="単純分岐"><span class="header-section-number">1.1.1</span> 単純分岐</h4>
-<p><code>if</code>は与えらえれた条件がTrue/Falseイズてであるかによって、実行すべき処理を決める命令である。</p>
-<div id="6f09796e" class="cell" data-execution_count="1">
+<p><code>if</code>は与えらえれた条件がTrue/Falseいずれかであるかによって、実行すべき処理を決める命令である。</p>
+<div id="7910572b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">10</span> <span class="co">#10をiに代入</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="dv">10</span>:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは10です。"</span>)</span>
@@ -435,7 +435,7 @@ End</code></pre>
 </div>
 </div>
 <p>今は「変数iが10である」という命題が真であったため、Trueのときの文が実行された。そして、<code>else</code>の部分は実行されずに<code>print("End")</code>が返されこの文全体の実行が終了したのである。<code>else</code>は”さもなくば〜“であり、命題が偽であった場合に実行される。次はiが10以外であるときを見てみよう。</p>
-<div id="592e8a51" class="cell" data-execution_count="2">
+<div id="fd4a155c" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">5</span> <span class="co">#iに10以外、すなわち5を代入</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="dv">10</span>:</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは10です。"</span>)</span>
@@ -451,7 +451,7 @@ End</code></pre>
 <p><code>if</code>は複合文のの一種である。複合文とは配下に複数のぶんをもち、それらの文を実行するかどうかを決めるための文のことである。実践的なコードはこの複合文の組み合わせによって構成される。</p>
 <p>Pythonにおいてはインデントは重要な意味をなす。複合文は節、ヘッダー、ブロック（スイート）で基本構成される。上の文においては<code>if</code>, <code>else</code>がヘッダー。それ以下の文である<code>print 〜〜</code>がブロックと呼ばれる。そしてヘッダーとそのブロックの塊を節という。このブロックの部分をインデントを用いて表す。</p>
 <p>空ブロックはpass命令で表す。ブロックの中に何も書かないとエラーになる。何も実行したくない場合は<code>pass</code>を用いて表す。以下を見てみよう。</p>
-<div id="b5ac19e1" class="cell" data-execution_count="3">
+<div id="e3e466d2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">10</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="dv">10</span>:</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -460,7 +460,7 @@ End</code></pre>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"End"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
-<pre>  <span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[3]</span><span class="ansi-green-fg">, line 4</span>
+<pre>  <span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[20]</span><span class="ansi-green-fg">, line 4</span>
 <span class="ansi-red-fg">    </span><span class="ansi-red-fg">else:</span>
     ^
 <span class="ansi-red-fg">IndentationError</span><span class="ansi-red-fg">:</span> expected an indented block after 'if' statement on line 2
@@ -469,7 +469,7 @@ End</code></pre>
 </div>
 </div>
 <p>これはエラーになる。なので、以下の文が正しい。</p>
-<div id="ad68266b" class="cell" data-execution_count="4">
+<div id="5d707c81" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">10</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="dv">10</span>:</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span>    </span>
@@ -486,7 +486,7 @@ End</code></pre>
 <h4 data-number="1.1.2" class="anchored" data-anchor-id="多岐分岐"><span class="header-section-number">1.1.2</span> 多岐分岐</h4>
 <p>　これは単純分岐が理解できていれば簡単である。<code>elif</code>ブロックを利用することで、「もしも〜だったら、〜であれば、いずれでもなければ　<span class="math inline">\cdots</span>」を構成できる。</p>
 <p>以下の文を見てみよう。</p>
-<div id="a8d43fe6" class="cell" data-execution_count="5">
+<div id="467487fd" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">50</span>:</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは50より大きい"</span>)</span>
@@ -499,7 +499,7 @@ End</code></pre>
 </div>
 </div>
 <p>次はiに45を入れてみよう。</p>
-<div id="8b12aaf6" class="cell" data-execution_count="6">
+<div id="9d4b2002" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">45</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">50</span>:</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは50より大きい"</span>)</span>
@@ -512,7 +512,7 @@ End</code></pre>
 </div>
 </div>
 <p>次はiに20を入れてみよう。</p>
-<div id="aefff3d1" class="cell" data-execution_count="7">
+<div id="d7095404" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">50</span>:</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは50より大きい"</span>)</span>
@@ -526,7 +526,7 @@ End</code></pre>
 </div>
 <p>elifブロックは、分岐の数だけ配置できる。</p>
 <p>上の文のほぼ同じであるが第1節と第2節を入れ替えた次の文を見てみよう。</p>
-<div id="8f580be5" class="cell" data-execution_count="8">
+<div id="bd64f5b3" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">30</span>:</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30より大きい"</span>)</span>
@@ -771,7 +771,7 @@ Table&nbsp;1: 正規表現の基本
 <section id="pythonで正規表現を取り扱う" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="pythonで正規表現を取り扱う"><span class="header-section-number">2.3</span> Pythonで正規表現を取り扱う</h3>
 <p>　ここからはPythonで正規表現を取り扱う方法についてまとめる。以下の例は文字列に含まれる電話番号を検索する例である。</p>
-<div id="c1ad3eba" class="cell" data-execution_count="9">
+<div id="4efd1523" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"電話番号は080-111-9999です。"</span></span>
@@ -862,7 +862,7 @@ Table&nbsp;2: Matchのオブジェクトの主なメソッド・属性
 </div>
 <p>　groupメソッドは、引く数を省略または0に指定した場合にマッチした文字列全体を返し、1以上の値を指定した場合はサブマッチ文字列を返す。サブマッチ文字列とは、正規表現の中で丸括弧で括られた部分にマッチした部分文字列のことであり、グループまたはキャプチャグループともいう。</p>
 <p>これらの例を<strong>Geminiたん</strong>が作ってくれました。</p>
-<div id="c1d7fcbf" class="cell" data-execution_count="10">
+<div id="09013e31" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"TEL: 090-1234-5678 (担当: 山田)"</span></span>
@@ -923,7 +923,7 @@ last</code></pre>
 <li>step : ステップ（増減）</li>
 </ul>
 <p>具体例を以下のコードで確認しよう。</p>
-<div id="8e6bf54f" class="cell" data-execution_count="11">
+<div id="e733a4ed" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">"あいうえおかきくけこ"</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[<span class="dv">2</span>])</span>
@@ -947,7 +947,7 @@ last</code></pre>
 </div>
 <p>このようにインデックス・スライス構文を使用することで部分的に文字列を取り出すことができる。また引数に負の番号を与えれば、遡った位置から開始、終了を設定でき、stepに負の引数を与えれば逆順の文字列を得る。</p>
 <p>　スライス構文は、内部的にはsliceオブジェクトとして処理される。sliceオブジェクトは、組み込み関数<code>slice</code>で生成でき、indicesメソッドでインデックス表現に変換できる。</p>
-<div id="fc3f3e6e" class="cell" data-execution_count="12">
+<div id="8415e53c" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">"あいうえおかきくけこ"</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[<span class="bu">slice</span>(<span class="op">-</span><span class="dv">5</span>, <span class="va">None</span>, <span class="op">-</span><span class="dv">1</span>)])</span>
@@ -962,7 +962,7 @@ last</code></pre>
 <section id="マッチした全ての文字列を取得" class="level3" data-number="2.5">
 <h3 data-number="2.5" class="anchored" data-anchor-id="マッチした全ての文字列を取得"><span class="header-section-number">2.5</span> マッチした全ての文字列を取得</h3>
 <p>　search/matchメソッドで得られる結果は、何も最初にマッチした文字列1つだけである。マッチした文字列全てを取得したいなら、findall/finditerメソッドを利用する。</p>
-<div id="776de93d" class="cell" data-execution_count="13">
+<div id="67023359" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"電話番号は000-999-9999です。携帯は080-2222-3333です！"</span></span>
@@ -976,7 +976,7 @@ last</code></pre>
 </div>
 </div>
 <p>findallメソッドの戻り値はマッチした文字列のリストである。マッチングの結果をMatchオブジェクトとして取得したいなら、finditerメソッドを利用する。</p>
-<div id="37cd1b4a" class="cell" data-execution_count="14">
+<div id="0b683561" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"電話番号は000-999-9999です。携帯は000-2222-3333です！"</span></span>
@@ -1056,7 +1056,7 @@ Table&nbsp;3: 主なマッチングフラグ
 </figure>
 </div>
 <p>具体例をいくつか見てみよう。まずは大文字・小文字を区別しないものである。</p>
-<div id="35b6d0b3" class="cell" data-execution_count="15">
+<div id="21b8711c" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"仕事用はwings@example.comです。プライベート用はYAMA@example.comです。"</span></span>
@@ -1072,7 +1072,7 @@ YAMA@example.com</code></pre>
 </div>
 </div>
 <p>続いてはマルチラインモードである。</p>
-<div id="a71540ce" class="cell" data-execution_count="16">
+<div id="69fc9b94" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"10人のインディアン。</span><span class="ch">\n</span><span class="st">1年生になったら。"</span></span>
@@ -1085,7 +1085,7 @@ YAMA@example.com</code></pre>
 </div>
 </div>
 <p><code>^</code>は行頭を表すので、これは10しか返されない。しかし、マルチラインモードを有効にすれば、</p>
-<div id="a1a446fe" class="cell" data-execution_count="17">
+<div id="101e27b8" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"10人のインディアン。</span><span class="ch">\n</span><span class="st">1年生になったら。"</span></span>
