@@ -1,0 +1,11 @@
+/*-- scss:rules --*/
+// ダークモード（cyborg）時のコールアウト内の引用文字色を読みやすく調整
+.callout-tip blockquote,
+.callout-tip blockquote p {
+  color: #f8f9fa; // 視認性の高いオフホワイト
+}
+
+// 引用内の強調（**太字**）もはっきりさせたい場合
+.callout-tip blockquote strong {
+  color: #ffffff;
+}

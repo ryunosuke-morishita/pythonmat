@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -45,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-cd8e83c62c3bccad1e487af9340ea913.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-e59c732adf54ce3437bd57c5accd57e4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-b8636250f1007cf9adf2e1a5d6a3549d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-cd8e83c62c3bccad1e487af9340ea913.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -75,6 +110,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -296,7 +374,19 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#制御構文" id="toc-制御構文" class="nav-link active" data-scroll-target="#制御構文"><span class="header-section-number">1</span> 制御構文</a>
   <ul class="collapse">
   <li><a href="#条件分岐" id="toc-条件分岐" class="nav-link" data-scroll-target="#条件分岐"><span class="header-section-number">1.1</span> 条件分岐</a></li>
+  <li><a href="#繰り返し処理" id="toc-繰り返し処理" class="nav-link" data-scroll-target="#繰り返し処理"><span class="header-section-number">1.2</span> 繰り返し処理</a></li>
   </ul></li>
+  <li><a href="#正規表現" id="toc-正規表現" class="nav-link" data-scroll-target="#正規表現"><span class="header-section-number">2</span> 正規表現</a>
+  <ul class="collapse">
+  <li><a href="#基本" id="toc-基本" class="nav-link" data-scroll-target="#基本"><span class="header-section-number">2.1</span> 基本</a></li>
+  <li><a href="#練習問題" id="toc-練習問題" class="nav-link" data-scroll-target="#練習問題"><span class="header-section-number">2.2</span> 練習問題</a></li>
+  <li><a href="#pythonで正規表現を取り扱う" id="toc-pythonで正規表現を取り扱う" class="nav-link" data-scroll-target="#pythonで正規表現を取り扱う"><span class="header-section-number">2.3</span> Pythonで正規表現を取り扱う</a></li>
+  <li><a href="#インデックススライス構文" id="toc-インデックススライス構文" class="nav-link" data-scroll-target="#インデックススライス構文"><span class="header-section-number">2.4</span> インデックス・スライス構文</a></li>
+  <li><a href="#マッチした全ての文字列を取得" id="toc-マッチした全ての文字列を取得" class="nav-link" data-scroll-target="#マッチした全ての文字列を取得"><span class="header-section-number">2.5</span> マッチした全ての文字列を取得</a></li>
+  <li><a href="#オプション" id="toc-オプション" class="nav-link" data-scroll-target="#オプション"><span class="header-section-number">2.6</span> オプション</a></li>
+  <li><a href="#正規表現による検索" id="toc-正規表現による検索" class="nav-link" data-scroll-target="#正規表現による検索"><span class="header-section-number">2.7</span> 正規表現による検索</a></li>
+  </ul></li>
+  <li><a href="#関数" id="toc-関数" class="nav-link" data-scroll-target="#関数"><span class="header-section-number">3</span> 関数</a></li>
   </ul>
 </nav>
     </div>
@@ -323,17 +413,701 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>#　制御構文・正規表現</p>
-<p>　今回はpythonにおける制御構文の条件分岐、繰り返し処理と関数及び正規表現についてまとめる。</p>
+<p>今回はpythonにおける制御構文の条件分岐、繰り返し処理と関数及び正規表現についてまとめる。</p>
 <section id="制御構文" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="制御構文"><span class="header-section-number">1</span> 制御構文</h2>
 <section id="条件分岐" class="level3" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="条件分岐"><span class="header-section-number">1.1</span> 条件分岐</h3>
-<p>　まずは条件分岐である。</p>
-<p>　</p>
-
-
+<p>　ここまでのプログラムは記述された順に処理して実行していた。しかし、実際はユーザーからの入力値や実行環境、その他条件に応じて、処理を変えるだろう。そのための処理の仕方を今回は学ぶ。</p>
+<section id="単純分岐" class="level4" data-number="1.1.1">
+<h4 data-number="1.1.1" class="anchored" data-anchor-id="単純分岐"><span class="header-section-number">1.1.1</span> 単純分岐</h4>
+<p><code>if</code>は与えらえれた条件がTrue/Falseイズてであるかによって、実行すべき処理を決める命令である。</p>
+<div id="6f09796e" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">10</span> <span class="co">#10をiに代入</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="dv">10</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは10です。"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは10ではありません。"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"End"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>変数iは10です。
+End</code></pre>
+</div>
+</div>
+<p>今は「変数iが10である」という命題が真であったため、Trueのときの文が実行された。そして、<code>else</code>の部分は実行されずに<code>print("End")</code>が返されこの文全体の実行が終了したのである。<code>else</code>は”さもなくば〜“であり、命題が偽であった場合に実行される。次はiが10以外であるときを見てみよう。</p>
+<div id="592e8a51" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">5</span> <span class="co">#iに10以外、すなわち5を代入</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="dv">10</span>:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは10です。"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは10ではありません。"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"End"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>変数iは10ではありません。
+End</code></pre>
+</div>
+</div>
+<p>今度は「変数iが10である」という命題が偽であったため、<code>else</code>以降が実行され文全体が終了した。これが単純分岐である。</p>
+<p><code>if</code>は複合文のの一種である。複合文とは配下に複数のぶんをもち、それらの文を実行するかどうかを決めるための文のことである。実践的なコードはこの複合文の組み合わせによって構成される。</p>
+<p>Pythonにおいてはインデントは重要な意味をなす。複合文は節、ヘッダー、ブロック（スイート）で基本構成される。上の文においては<code>if</code>, <code>else</code>がヘッダー。それ以下の文である<code>print 〜〜</code>がブロックと呼ばれる。そしてヘッダーとそのブロックの塊を節という。このブロックの部分をインデントを用いて表す。</p>
+<p>空ブロックはpass命令で表す。ブロックの中に何も書かないとエラーになる。何も実行したくない場合は<code>pass</code>を用いて表す。以下を見てみよう。</p>
+<div id="b5ac19e1" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">10</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="dv">10</span>:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは10ではありません。"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"End"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre>  <span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[3]</span><span class="ansi-green-fg">, line 4</span>
+<span class="ansi-red-fg">    </span><span class="ansi-red-fg">else:</span>
+    ^
+<span class="ansi-red-fg">IndentationError</span><span class="ansi-red-fg">:</span> expected an indented block after 'if' statement on line 2
+</pre>
+</div>
+</div>
+</div>
+<p>これはエラーになる。なので、以下の文が正しい。</p>
+<div id="ad68266b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">10</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="dv">10</span>:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span>    </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは10ではありません。"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"End"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>End</code></pre>
+</div>
+</div>
+<p>pass命令を使えばエラーにならない。</p>
 </section>
+<section id="多岐分岐" class="level4" data-number="1.1.2">
+<h4 data-number="1.1.2" class="anchored" data-anchor-id="多岐分岐"><span class="header-section-number">1.1.2</span> 多岐分岐</h4>
+<p>　これは単純分岐が理解できていれば簡単である。<code>elif</code>ブロックを利用することで、「もしも〜だったら、〜であれば、いずれでもなければ　<span class="math inline">\cdots</span>」を構成できる。</p>
+<p>以下の文を見てみよう。</p>
+<div id="a8d43fe6" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">50</span>:</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは50より大きい"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> i <span class="op">&gt;</span> <span class="dv">30</span>:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30より大きい"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30以下です。"</span>)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>変数iは50より大きい</code></pre>
+</div>
+</div>
+<p>次はiに45を入れてみよう。</p>
+<div id="8b12aaf6" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">45</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">50</span>:</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは50より大きい"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> i <span class="op">&gt;</span> <span class="dv">30</span>:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30より大きい"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30以下です。"</span>)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>変数iは30より大きい</code></pre>
+</div>
+</div>
+<p>次はiに20を入れてみよう。</p>
+<div id="aefff3d1" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">50</span>:</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは50より大きい"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> i <span class="op">&gt;</span> <span class="dv">30</span>:</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30より大きい"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30以下です。"</span>)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>変数iは30以下です。</code></pre>
+</div>
+</div>
+<p>elifブロックは、分岐の数だけ配置できる。</p>
+<p>上の文のほぼ同じであるが第1節と第2節を入れ替えた次の文を見てみよう。</p>
+<div id="8f580be5" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">30</span>:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30より大きい"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> i <span class="op">&gt;</span> <span class="dv">50</span>:</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは50より大きい"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"変数iは30以下です。"</span>)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>変数iは30より大きい</code></pre>
+</div>
+</div>
+<p>この場合は、たとえ複数の条件に合致していても、最初に合致した1つだけ実行されることに注意されたい。つまり、elifを用いるときは順序が大切である。</p>
+</section>
+<section id="入れ子構造" class="level4" data-number="1.1.3">
+<h4 data-number="1.1.3" class="anchored" data-anchor-id="入れ子構造"><span class="header-section-number">1.1.3</span> 入れ子構造</h4>
+</section>
+<section id="matchdotscase" class="level4" data-number="1.1.4">
+<h4 data-number="1.1.4" class="anchored" data-anchor-id="matchdotscase"><span class="header-section-number">1.1.4</span> match<span class="math inline">\dots</span>case</h4>
+</section>
+</section>
+<section id="繰り返し処理" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="繰り返し処理"><span class="header-section-number">1.2</span> 繰り返し処理</h3>
+<section id="for文" class="level4" data-number="1.2.1">
+<h4 data-number="1.2.1" class="anchored" data-anchor-id="for文"><span class="header-section-number">1.2.1</span> for文</h4>
+</section>
+<section id="while文" class="level4" data-number="1.2.2">
+<h4 data-number="1.2.2" class="anchored" data-anchor-id="while文"><span class="header-section-number">1.2.2</span> while文</h4>
+</section>
+</section>
+</section>
+<section id="正規表現" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="正規表現"><span class="header-section-number">2</span> 正規表現</h2>
+<p>　正規表現とは「あいまいな文字列パターンを表現するための記法」である。例えば<code>[0-9]{3}-[0-9]{4}</code>という正規表現は一般的な郵便番号を表す。[0~9の3桁] + [-] + [0~9の4桁]という文字列パターンを短く表現できている。 　単にマッチするかどうかの判定だけではなく、正規表現を利用すれば、掲示板への投稿記事から有害なHTMLタグだけを取り除いたり、任意の文書からメールアドレスだけを取り出したり、といったこともできる。</p>
+<section id="基本" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="基本"><span class="header-section-number">2.1</span> 基本</h3>
+<p>　正規表現によって表されたある文字列パターンを<strong>正規表現パターン</strong>という。正規表現パターンにマッチする文字列は1つだけとは限らない。正規表現の中でも特によく使うものについて、その記法を以下の表に示す。</p>
+<div id="tbl-normal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: 正規表現の基本
+</figcaption>
+<div aria-describedby="tbl-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table table-bordered caption-top">
+<thead style="background-color: #d9eaf7;">
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: center; width: 12%;">分類</th>
+<th data-quarto-table-cell-role="th" style="width: 23%">パターン</th>
+<th data-quarto-table-cell-role="th" style="width: 65%">マッチする文字列</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td rowspan="5" style="text-align: center; vertical-align: middle;">基本</td>
+<td><code>XYZ</code></td>
+<td>「XYZ」という文字列</td>
+</tr>
+<tr class="even">
+<td><code>[XYZ]</code></td>
+<td>X、Y、Zいずれかの1文字</td>
+</tr>
+<tr class="odd">
+<td><code>[^XYZ]</code></td>
+<td>X、Y、Z以外のいずれかの1文字</td>
+</tr>
+<tr class="even">
+<td><code>[X-Z]</code></td>
+<td>X〜Zの範囲の中の1文字</td>
+</tr>
+<tr class="odd">
+<td><code>(X|Y|Z)</code></td>
+<td>X、Y、Zのいずれかの文字列</td>
+</tr>
+<tr class="even">
+<td rowspan="6" style="text-align: center; vertical-align: middle;">量指定</td>
+<td><code>X*</code></td>
+<td>0文字以上のX</td>
+</tr>
+<tr class="odd">
+<td><code>X?</code></td>
+<td>0、または1文字のX</td>
+</tr>
+<tr class="even">
+<td><code>X+</code></td>
+<td>1文字以上のX</td>
+</tr>
+<tr class="odd">
+<td><code>X{n}</code></td>
+<td>Xとn回一致</td>
+</tr>
+<tr class="even">
+<td><code>X{n,}</code></td>
+<td>Xとn回以上一致</td>
+</tr>
+<tr class="odd">
+<td><code>X{m,n}</code></td>
+<td>Xとm〜n回一致</td>
+</tr>
+<tr class="even">
+<td rowspan="2" style="text-align: center; vertical-align: middle;">位置指定</td>
+<td><code>^</code></td>
+<td>行の先頭に一致</td>
+</tr>
+<tr class="odd">
+<td><code>$</code></td>
+<td>行の末尾に一致</td>
+</tr>
+<tr class="even">
+<td rowspan="10" style="text-align: center; vertical-align: middle;">文字セット</td>
+<td><code>.</code></td>
+<td>任意の一文字</td>
+</tr>
+<tr class="odd">
+<td><code>\w</code></td>
+<td>Unicode文字、数字、アンダースコアに一致</td>
+</tr>
+<tr class="even">
+<td><code>\W</code></td>
+<td>文字以外に一致</td>
+</tr>
+<tr class="odd">
+<td><code>\d</code></td>
+<td>Unicode10進数値に一致</td>
+</tr>
+<tr class="even">
+<td><code>\D</code></td>
+<td>数字以外に一致</td>
+</tr>
+<tr class="odd">
+<td><code>\n</code></td>
+<td>改行に一致</td>
+</tr>
+<tr class="even">
+<td><code>\r</code></td>
+<td>復帰に一致</td>
+</tr>
+<tr class="odd">
+<td><code>\t</code></td>
+<td>タブ文字に一致</td>
+</tr>
+<tr class="even">
+<td><code>\s</code></td>
+<td>Unicode空白文字に一致</td>
+</tr>
+<tr class="odd">
+<td><code>\S</code></td>
+<td>空白以外の文字に一致</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="練習問題" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="練習問題"><span class="header-section-number">2.2</span> 練習問題</h3>
+<p><a href="#tbl-normal" class="quarto-xref">Table&nbsp;1</a> を手がかりに以下の正規表現がどのような文字列にマッチしているか、読み解こう。</p>
+<p><strong>第1問</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>[<span class="fu">\w</span>.+-]+@([<span class="fu">\w</span>-]+<span class="fu">\.</span>)+[<span class="fu">\w</span>-]{2,}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="解答を見る">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答を見る
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>一般的なメールアドレスにマッチする。例として<code>taro.yamada+1@example.com</code>等が挙げられる。</li>
+<li>各要素の分解
+<ul>
+<li><code>[\w.+-]+</code> : <code>@</code> の前の部分。英数字・アンダースコアのほか、ドット、プラス、ハイフンが1文字以上続く。</li>
+<li><code>@</code> : 文字通りの <code>@</code> マーク。</li>
+<li><code>([\w-]+\.)+</code> : ドメインの前半部分。「英数字・アンダースコア・ハイフンの1回以上の繰り返し、ドット」という塊が1回以上繰り返される。</li>
+<li><code>[\w-]{2,}</code>: ドメインの末尾。英数字・アンダースコア・ハイフンが2文字以上続く。</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>第2問</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>https?://[<span class="fu">\w</span>.-]+(:<span class="fu">\d</span>{1,5})?(/[<span class="fu">\w</span>./-]*)?(#[<span class="fu">\w</span>-]+)?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="解答を見る">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答を見る
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>ポート番号やページ内のリンクがついている場合にも対応したURLにマッチする。</li>
+<li>各要素の分解
+<ul>
+<li><code>https?://</code> : <code>http://</code>または<code>https://</code>。</li>
+<li><code>[\w.-]+</code> : ドメイン名部分。</li>
+<li><code>(:\d{1,5})?</code> : ポート番号。：の後に数字が1から5桁。<code>?</code>によりその番号が0回か1回で一致。</li>
+<li><code>(/[\w./-]*)?</code> : パス部分。スラッシュの後に文字が0文字以上続く。</li>
+<li><code>(#[\w-]+)?</code> : ページ内のリンク。<code>#</code>の後に英文字やハイフンが1文字以上続く。<code>?</code>によりそれらが0回か1回で一致。</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>第3問</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>^(<span class="fu">\.\.</span>?/)?([<span class="fu">\w</span>-]+/)*[<span class="fu">\w</span>-]+<span class="fu">\.</span>(png|jpe?g|gif|webp)<span class="ss">$</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="解答を見る">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答を見る
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>画像ファイルへのパスにマッチする。</li>
+<li>各要素の分解
+<ul>
+<li><code>^</code> と <code>$</code> : 行頭から行末まで全体が一致する必要がある。</li>
+<li><code>(\.\.?/)?</code> : 相対パスの指定。単に<code>.</code>を指定すると、任意の一文字になってしまうため、エスケープ<code>\</code>を付与。<code>./</code>か<code>../</code>が0回か1回マッチする。</li>
+<li><code>([\w-]+/)*</code> : 途中のフォルダ階層。<code>*</code>により0回以上でマッチする。</li>
+<li><code>[\w-]+</code> : 画像ファイル名。</li>
+<li><code>\.</code> : 拡張子前のドット。</li>
+<li><code>(png|jpe?g|gif|webp)</code> : 拡張子名。<code>jpg</code>または<code>jpeg</code>が混在しているため<code>e?</code>で<code>e</code>が0回か1回マッチさせる。なお<code>.jpg</code>と<code>.jpeg</code>はファイル形式として全く同じものである。</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="pythonで正規表現を取り扱う" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="pythonで正規表現を取り扱う"><span class="header-section-number">2.3</span> Pythonで正規表現を取り扱う</h3>
+<p>　ここからはPythonで正規表現を取り扱う方法についてまとめる。以下の例は文字列に含まれる電話番号を検索する例である。</p>
+<div id="c1ad3eba" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"電話番号は080-111-9999です。"</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ptn <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"</span><span class="kw">(</span><span class="dv">\d</span><span class="op">{2,4}</span><span class="kw">)</span><span class="vs">-</span><span class="kw">(</span><span class="dv">\d</span><span class="op">{2,4}</span><span class="kw">)</span><span class="vs">-</span><span class="kw">(</span><span class="dv">\d</span><span class="op">{4}</span><span class="kw">)</span><span class="vs">"</span>) <span class="co">#正規表現を準備、rは\エスケープシーケンスを文字として扱う</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> result <span class="op">:=</span> ptn.search(msg) :</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result.group(<span class="dv">0</span>)) <span class="co">#マッチした文字列全体</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result.group(<span class="dv">1</span>)) <span class="co">#1つ目</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result.group(<span class="dv">2</span>)) <span class="co">#2つ目</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result.group(<span class="dv">3</span>)) <span class="co">#3つ目</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> :</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"見つかりませんでした。"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>080-111-9999
+080
+111
+9999</code></pre>
+</div>
+</div>
+<p>　正規表現を利用するには、<code>re</code>モジュールの<code>compile</code>関数で正規表現パターンを準備する。</p>
+<p>　正規表現パターンには、性質上<code>\</code>が多用される。文字列リテラルでのエスケープシーケンスとの衝突を防ぐために、raw文字列<code>r"..."</code>で表すのが安全であろう。</p>
+<p>　<code>compile</code>関数は、戻り値として正規表現(Pattern)オブジェクトを返すので、そのsearchメソッドで検索を実行する。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ptn.search(string[, pos[, endpos]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>ptn : Patternオブジェクト</li>
+<li>string : 検索対象の文字列</li>
+<li>pos : 検索開始位置</li>
+<li>endpos : 検索終了位置</li>
+</ul>
+<p>　引数pos/endposを指定することで、文字列の検索範囲を限定することもできる。searchメソッドの戻り値はマッチング情報（Matchオブジェクト）、検索結果がなかった場合には<code>None</code>である。Matchオブジェクト経由で取得できる情報は以下の表に示す。</p>
+<div id="tbl-match" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-match-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Matchのオブジェクトの主なメソッド・属性
+</figcaption>
+<div aria-describedby="tbl-match-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">メソッド・属性</th>
+<th style="text-align: center;">概要</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>group([group, ...])</code></td>
+<td style="text-align: center;">group番目にマッチした部分文字列を取得</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>start([group])</code></td>
+<td style="text-align: center;">開始位置を取得</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>end([group])</code></td>
+<td style="text-align: center;">終了位置を取得</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>span([group])</code></td>
+<td style="text-align: center;">「開始位置、終了位置」形式のタプルを取得</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>expand(templ)</code></td>
+<td style="text-align: center;">マッチした結果をテンプレートtemplに埋め込んだ結果を取得</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>pos</code></td>
+<td style="text-align: center;">検索時に指定された開始位置</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>endpos</code></td>
+<td style="text-align: center;">検索時に指定された終了位置</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>lastindex</code></td>
+<td style="text-align: center;">最後にマッチしたインデックス</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>lastgroup</code></td>
+<td style="text-align: center;">最後にマッチしたグループの名前</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>　groupメソッドは、引く数を省略または0に指定した場合にマッチした文字列全体を返し、1以上の値を指定した場合はサブマッチ文字列を返す。サブマッチ文字列とは、正規表現の中で丸括弧で括られた部分にマッチした部分文字列のことであり、グループまたはキャプチャグループともいう。</p>
+<p>これらの例を<strong>Geminiたん</strong>が作ってくれました。</p>
+<div id="c1d7fcbf" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"TEL: 090-1234-5678 (担当: 山田)"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>pattern <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"</span><span class="kw">(</span><span class="fu">?P&lt;area&gt;</span><span class="dv">\d</span><span class="op">{3}</span><span class="kw">)</span><span class="vs">-</span><span class="kw">(</span><span class="fu">?P&lt;mid&gt;</span><span class="dv">\d</span><span class="op">{4}</span><span class="kw">)</span><span class="vs">-</span><span class="kw">(</span><span class="fu">?P&lt;last&gt;</span><span class="dv">\d</span><span class="op">{4}</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 5文字目〜20文字目の範囲だけ検索</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> pattern.search(text, pos<span class="op">=</span><span class="dv">5</span>, endpos<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> m:  <span class="co"># マッチしないと None になるためチェック</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- マッチした文字列の取得 ---</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.group())          <span class="co"># '090-1234-5678'（引数なし or 0 で全体）</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.group(<span class="dv">1</span>))         <span class="co"># '090'（1番目のグループ）</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.group(<span class="dv">1</span>, <span class="dv">3</span>))      <span class="co"># ('090', '5678')（複数指定でタプル）</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.group(<span class="st">"area"</span>))    <span class="co"># '090'（名前指定も可能）</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- 位置（インデックス）の取得 ---</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.start())          <span class="co"># 5（全体の開始位置）</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.end())            <span class="co"># 18（全体の終了位置：スライス同様、この手前まで）</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.span())           <span class="co"># (5, 18)（startとendのタプル）</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.span(<span class="dv">2</span>))          <span class="co"># (9, 13)（2番目のグループ '1234' の範囲）</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- テンプレートへの埋め込み ---</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.expand(<span class="vs">r"市外局番:</span><span class="va">\g&lt;area&gt;</span><span class="vs">, 末尾:</span><span class="ch">\3</span><span class="vs">"</span>))</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 出力: '市外局番:090, 末尾:5678'</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- 検索時の情報・グループ情報 ---</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.pos)              <span class="co"># 5（指定した開始位置）</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.endpos)           <span class="co"># 20（指定した終了位置）</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.lastindex)        <span class="co"># 3（最後にマッチしたグループの番号）</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.lastgroup)        <span class="co"># 'last'（最後にマッチしたグループの名前）</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>090-1234-5678
+090
+('090', '5678')
+090
+5
+18
+(5, 18)
+(9, 13)
+市外局番:090, 末尾:5678
+5
+20
+3
+last</code></pre>
+</div>
+</div>
+</section>
+<section id="インデックススライス構文" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="インデックススライス構文"><span class="header-section-number">2.4</span> インデックス・スライス構文</h3>
+<p>　文字列から部分的な文字列を取り出すには、インデックス・スライス構文を利用する。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>txt[index]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>txt[start:end:step]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>txt : 文字列</li>
+<li>index : インデックス番号</li>
+<li>start : 開始位置</li>
+<li>end : 終了位置</li>
+<li>step : ステップ（増減）</li>
+</ul>
+<p>具体例を以下のコードで確認しよう。</p>
+<div id="8e6bf54f" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">"あいうえおかきくけこ"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[<span class="dv">2</span>])</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[<span class="dv">2</span>:<span class="dv">5</span>])</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[<span class="dv">2</span>:])</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[:<span class="dv">5</span>])</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[:])</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[<span class="op">-</span><span class="dv">7</span>:<span class="op">-</span><span class="dv">5</span>])</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[::<span class="dv">2</span>])</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[::<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>う
+うえお
+うえおかきくけこ
+あいうえお
+あいうえおかきくけこ
+えお
+あうおきけ
+こけくきかおえういあ</code></pre>
+</div>
+</div>
+<p>このようにインデックス・スライス構文を使用することで部分的に文字列を取り出すことができる。また引数に負の番号を与えれば、遡った位置から開始、終了を設定でき、stepに負の引数を与えれば逆順の文字列を得る。</p>
+<p>　スライス構文は、内部的にはsliceオブジェクトとして処理される。sliceオブジェクトは、組み込み関数<code>slice</code>で生成でき、indicesメソッドでインデックス表現に変換できる。</p>
+<div id="fc3f3e6e" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="st">"あいうえおかきくけこ"</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(title[<span class="bu">slice</span>(<span class="op">-</span><span class="dv">5</span>, <span class="va">None</span>, <span class="op">-</span><span class="dv">1</span>)])</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">slice</span>(<span class="op">-</span><span class="dv">5</span>, <span class="va">None</span>, <span class="op">-</span><span class="dv">1</span>).indices(<span class="bu">len</span>(title)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>かおえういあ
+(5, -1, -1)</code></pre>
+</div>
+</div>
+<p><code>slice(-5, None, -1)</code>は<code>[-5::-1]</code>と同じ意味である。<code>(5, -1, -1)</code>は5から-1未満まで-1方向にスライスするということである。</p>
+</section>
+<section id="マッチした全ての文字列を取得" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="マッチした全ての文字列を取得"><span class="header-section-number">2.5</span> マッチした全ての文字列を取得</h3>
+<p>　search/matchメソッドで得られる結果は、何も最初にマッチした文字列1つだけである。マッチした文字列全てを取得したいなら、findall/finditerメソッドを利用する。</p>
+<div id="776de93d" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"電話番号は000-999-9999です。携帯は080-2222-3333です！"</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>ptn <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"</span><span class="dv">\d</span><span class="op">{2,4}</span><span class="vs">-</span><span class="dv">\d</span><span class="op">{2,4}</span><span class="vs">-</span><span class="dv">\d</span><span class="op">{4}</span><span class="vs">"</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> ptn.findall(msg)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>000-999-9999
+080-2222-3333</code></pre>
+</div>
+</div>
+<p>findallメソッドの戻り値はマッチした文字列のリストである。マッチングの結果をMatchオブジェクトとして取得したいなら、finditerメソッドを利用する。</p>
+<div id="37cd1b4a" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"電話番号は000-999-9999です。携帯は000-2222-3333です！"</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>ptn <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"</span><span class="kw">(</span><span class="dv">\d</span><span class="op">{2,4}</span><span class="kw">)</span><span class="vs">-</span><span class="kw">(</span><span class="dv">\d</span><span class="op">{2,4}</span><span class="vs">-</span><span class="kw">(</span><span class="dv">\d</span><span class="op">{4}</span><span class="kw">))</span><span class="vs">"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> ptn.finditer(msg)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"開始位置：</span><span class="sc">{</span>result<span class="sc">.</span>start()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"終了位置：</span><span class="sc">{</span>result<span class="sc">.</span>end()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"マッチング文字列：</span><span class="sc">{</span>result<span class="sc">.</span>group()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"市外局番：</span><span class="sc">{</span>result<span class="sc">.</span>group(<span class="dv">1</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"市内局番：</span><span class="sc">{</span>result<span class="sc">.</span>group(<span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"加入者番号：</span><span class="sc">{</span>result<span class="sc">.</span>group(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-----------------"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>開始位置：5
+終了位置：17
+マッチング文字列：000-999-9999
+市外局番：000
+市内局番：999-9999
+加入者番号：9999
+-----------------
+開始位置：23
+終了位置：36
+マッチング文字列：000-2222-3333
+市外局番：000
+市内局番：2222-3333
+加入者番号：3333
+-----------------</code></pre>
+</div>
+</div>
+<p>　fはf文字列であり、フォーマット済み文字リテラルという。要するに文字列として出力しながら、中で演算ができるものである。</p>
+</section>
+<section id="オプション" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="オプション"><span class="header-section-number">2.6</span> オプション</h3>
+<p>　Patternクラスをインスタンス化する際は、第2引数に検索オプションを渡すことができる。</p>
+<div id="tbl-option" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-option-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: 主なマッチングフラグ
+</figcaption>
+<div aria-describedby="tbl-option-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">設定値</th>
+<th style="text-align: center;">概要</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">IGNORECASE, I</td>
+<td style="text-align: center;">大文字小文字を区別しない</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">MULTILINE, M</td>
+<td style="text-align: center;">複数行モードの有効化</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">DOTALL, S</td>
+<td style="text-align: center;">「.」が行末記号を含む任意の文字にマッチ</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">VERBOSE, X</td>
+<td style="text-align: center;">空白とコメントの有効化</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">ASCII, A</td>
+<td style="text-align: center;"><code>\w, \W, \b, \B, \d, \D, \s, \S</code>でASCII文字に限定したマッチ</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LOCALE, L</td>
+<td style="text-align: center;"><code>\w, \W</code>などをロケールに従って処理</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>具体例をいくつか見てみよう。まずは大文字・小文字を区別しないものである。</p>
+<div id="35b6d0b3" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"仕事用はwings@example.comです。プライベート用はYAMA@example.comです。"</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>ptn <span class="op">=</span> re.<span class="bu">compile</span>(</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r"</span><span class="pp">[a-z009.!#$%&amp;</span><span class="ch">\'</span><span class="pp">*+</span><span class="ch">\=</span><span class="pp">?^_{|}~-]</span><span class="op">+</span><span class="vs">@</span><span class="pp">[a-z0-9-]</span><span class="op">+</span><span class="kw">(</span><span class="ch">\.</span><span class="pp">[a-z0-9-]</span><span class="op">+</span><span class="kw">)</span><span class="op">*</span><span class="vs">"</span>, </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    re.IGNORECASE)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> ptn.finditer(msg)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result.group())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>wings@example.com
+YAMA@example.com</code></pre>
+</div>
+</div>
+<p>続いてはマルチラインモードである。</p>
+<div id="a71540ce" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"10人のインディアン。</span><span class="ch">\n</span><span class="st">1年生になったら。"</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>ptn <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"</span><span class="dv">^\d</span><span class="op">*</span><span class="vs">"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> ptn.findall(msg)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10</code></pre>
+</div>
+</div>
+<p><code>^</code>は行頭を表すので、これは10しか返されない。しかし、マルチラインモードを有効にすれば、</p>
+<div id="a1a446fe" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>msg <span class="op">=</span> <span class="st">"10人のインディアン。</span><span class="ch">\n</span><span class="st">1年生になったら。"</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>ptn <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r"</span><span class="dv">^\d</span><span class="op">*</span><span class="vs">"</span>, re.MULTILINE)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> ptn.findall(msg)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> result <span class="kw">in</span> results:</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10
+1</code></pre>
+</div>
+</div>
+<p>　改行の直後の1までマッチするようになる。</p>
+</section>
+<section id="正規表現による検索" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="正規表現による検索"><span class="header-section-number">2.7</span> 正規表現による検索</h3>
+</section>
+</section>
+<section id="関数" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="関数"><span class="header-section-number">3</span> 関数</h2>
+
+
 </section>
 
 </main> <!-- /main -->

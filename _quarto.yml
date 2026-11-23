@@ -19,9 +19,8 @@ website:
 format:
   html:
     theme: 
-      light: cosmo
-            - brand
-      dark: cyborg
+      light: [defalt, light-custom.scss]
+      dark: [cyborg, dark-custom.scss]
     toc: true
     number-sections: true
     code-copy: true
